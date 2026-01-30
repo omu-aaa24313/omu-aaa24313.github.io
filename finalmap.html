@@ -77,6 +77,17 @@
             // ポップアップで学校名を表示
             .addTo(map);  
         });            
+
+        fetch('./27000_2.geojson')
+        .then(res => res.json())
+        .then(json => {
+            L.geoJSON(json, {
+                pointToLayer: (feature, latlng) =>
+                L.circleMarker(latlng, { radius: 6 })
+            })
+            .bindPopup(layer => layer.feature.properties.name)
+            .addTo(map);
+  });
         </script>
     </body>
 </html>
